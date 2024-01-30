@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ieslosmontecillos.appinformes.AppInformes">
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="Informes">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#ListadoFacturas" text="Listado Facturas" />
+                        <MenuItem mnemonicParsing="false" onAction="#VentasTotales" text="Ventas Totales" />
+                        <MenuItem mnemonicParsing="false" onAction="#FacturasPorCliente" text="Facturas por Cliente" />
+                        <MenuItem mnemonicParsing="false" onAction="#SubinformeListadoFacturas" text="Subinforme Listado Facturas" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+   <center>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Introduce ID del cliente para Facturas por cliente" />
+            <TextField fx:id="clientNumber" maxWidth="50.0" prefHeight="25.0" prefWidth="195.0" />
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </center>
+</BorderPane>
