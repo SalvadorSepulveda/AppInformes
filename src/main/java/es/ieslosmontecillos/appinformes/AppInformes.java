@@ -37,7 +37,6 @@ public class AppInformes extends Application {
     @javafx.fxml.FXML
     private TextField clientNumber;
 
-
     @Override
     public void start(Stage primaryStage) {
         //establecemos la conexión con la BD
@@ -56,6 +55,7 @@ public class AppInformes extends Application {
             Logger.getLogger(AppInformes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     @Override
     public void stop() throws Exception {
         try {
@@ -119,7 +119,6 @@ public class AppInformes extends Application {
         try {
             JasperReport jr = (JasperReport)JRLoader.loadObject(getClass().getResource("ListadoFactura.jasper"));
             JasperReport jsr = (JasperReport)JRLoader.loadObject(getClass().getResource("SubinformeFactura.jasper"));
-
             Map parametros = new HashMap();
             parametros.put("subReportParameter", jsr);
             JasperPrint jp = (JasperPrint) JasperFillManager.fillReport(jr, parametros, conexion);
@@ -137,16 +136,22 @@ public class AppInformes extends Application {
     @javafx.fxml.FXML
     public void FacturasPorCliente(ActionEvent actionEvent) {
         try {
-            if (clientNumber.getText() != null) {
+            if (clientNumber.getText() != null && !clientNumber.getText().trim().isEmpty()) {
                 Map<String, Object> parametros = new HashMap<>();
-                parametros.put("IDENTIFICADOR", Integer.valueOf(clientNumber.getText()));
-                generaInforme("FacturaPorClientes.jasper", parametros);
+                try {
+                    parametros.put("IDENTIFICADOR", Integer.valueOf(clientNumber.getText().trim()));
+                    generaInforme("FacturaPorClientes.jasper", parametros);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Por favor, introduce solo números, no caracteres.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Introduzca un número de cliente");
             }
         } catch (Exception ex) {
-            throw new RuntimeException(ex);
+            JOptionPane.showMessageDialog(null, "Error al generar el informe: " + ex.getMessage());
+            ex.printStackTrace();
         }
     }
-
 
     @javafx.fxml.FXML
     public void VentasTotales(ActionEvent actionEvent) {
@@ -172,6 +177,20 @@ public class AppInformes extends Application {
             generaSubinforme();
         } catch (Exception ex) {
             throw new RuntimeException(ex);
+        }
+    }
+
+    @javafx.fxml.FXML
+    public void openDialog(ActionEvent actionEvent) {
+        try {
+            FXMLLoader LOADER = new FXMLLoader(getClass().getResource("dialog.fxml"));
+            Parent root = LOADER.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException ex) {
+            Logger.getLogger(AppInformes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

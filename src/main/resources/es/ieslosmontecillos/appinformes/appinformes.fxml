@@ -17,22 +17,11 @@
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#ListadoFacturas" text="Listado Facturas" />
                         <MenuItem mnemonicParsing="false" onAction="#VentasTotales" text="Ventas Totales" />
-                        <MenuItem mnemonicParsing="false" onAction="#FacturasPorCliente" text="Facturas por Cliente" />
+                        <MenuItem mnemonicParsing="false" onAction="#openDialog" text="Facturas por Cliente" />
                         <MenuItem mnemonicParsing="false" onAction="#SubinformeListadoFacturas" text="Subinforme Listado Facturas" />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
     </top>
-   <center>
-      <VBox BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Introduce ID del cliente para Facturas por cliente" />
-            <TextField fx:id="clientNumber" maxWidth="50.0" prefHeight="25.0" prefWidth="195.0" />
-         </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </VBox>
-   </center>
 </BorderPane>
